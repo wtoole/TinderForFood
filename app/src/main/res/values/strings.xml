@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TinderForFood</string>
+    <string name="prev_btn_txt">Prev</string>
+    <string name="recipes_list_is_empty_txt">Recipes list is empty</string>
+    <string name="next_btn_txt">Next</string>
+    <string name="name_label">Name:</string>
+    <string name="artist_label">Artist:</string>
+    <string name="track_label">Track:</string>
+    <string name="add_recipe_btn_txt">Add Recipe</string>
+    <string name="add_recipe_screen_title">Add Recipe</string>
+    <string name="addrecipe_is_awesome_label">Is Awesome</string>
+    <string name="addrecipe_track_num_label">Track Num:</string>
+    <string name="addrecipe_artist_label">Artist:</string>
+    <string name="addrecipe_name_label">Name:</string>
 </resources>
