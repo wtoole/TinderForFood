@@ -3,14 +3,19 @@ package edu.towson.cosc435.sabol.tinderforfood.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import edu.towson.cosc435.sabol.tinderforfood.R
 import edu.towson.cosc435.sabol.tinderforfood.interfaces.IRecipeController
 import edu.towson.cosc435.sabol.tinderforfood.models.Recipe
 import kotlinx.android.synthetic.main.fragment_add_recipe.*
+import okhttp3.*
+import org.json.JSONArray
+import java.io.IOException
 import java.lang.Exception
 import java.util.*
 
@@ -19,7 +24,12 @@ import java.util.*
  */
 class AddRecipeFragment : Fragment() {
 
+    private val BASE_URL: String = "https://my-json-server.typicode.com/wtoole/recipe/recipes"
+
+    var recipeList: List<Recipe> = emptyList()
+
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -39,11 +49,11 @@ class AddRecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         addRecipeBtn.setOnClickListener { handleAddRecipeClick() }
         backBtn.setOnClickListener { handleBackBtnClick() }
         skipBtn.setOnClickListener { handleSkipBtnClick() }
         foodCategory()
+        fetchJson()
         val recipe = recipeController.getRecipeForEdit()
         populateRecipeForm(recipe)
     }
@@ -124,10 +134,13 @@ class AddRecipeFragment : Fragment() {
             addRecipeBtn.text = resources.getString(R.string.add_recipe_btn_txt)
         }
 
+        getRandomRecipeByFoodCategory(food_cat.text.toString())
+
         clearForm()
     }
 
     private fun foodCategory(){
+        Log.i("foot cat", "FOR THE LOG")
         val random = Random().nextInt(10) + 1
         if(random == 1 )
             food_cat.text = "Pizza"
@@ -138,13 +151,13 @@ class AddRecipeFragment : Fragment() {
         if(random == 4 )
             food_cat.text = "Salad"
         if(random == 5 )
-            food_cat.text = "Sandwich"
+            food_cat.text = "Sandwhich"
         if(random == 6 )
             food_cat.text = "Chicken"
         if(random == 7 )
             food_cat.text = "Seafood"
         if(random == 8 )
-            food_cat.text = "Vegan"
+            food_cat.text = "vegan"
         if(random == 9 )
             food_cat.text = "Dessert"
         if(random == 10 )
@@ -166,5 +179,53 @@ class AddRecipeFragment : Fragment() {
         }
         return id
     }
+
+    private fun parseJson(json: String?): List<Recipe> {
+        val recipes = mutableListOf<Recipe>()
+        if(json == null) return recipes
+        val jsonArr = JSONArray(json)
+        var i = 0
+        while(i < jsonArr.length()) {
+            val jsonObj = jsonArr.getJSONObject(i)
+            val recipe = Recipe(
+                id = UUID.fromString(jsonObj.getString("id")),
+                artist = jsonObj.getString("artist"),
+                name = jsonObj.getString("name"),
+                trackNum = jsonObj.getInt("track_num"),
+                isAwesome = jsonObj.getBoolean("is_awesome")
+            )
+            recipes.add(recipe)
+            i++
+        }
+
+        return recipes
+    }
+
+    private fun fetchJson() {
+
+        val request = Request.Builder().url(BASE_URL).build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                println("Failed")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                recipeList = parseJson(response.body?.string())
+            }
+        })
+    }
+
+    private fun getRandomRecipeByFoodCategory(food: String){
+        var random = Random().nextInt(30)
+        while(!recipeList.get(random).name.equals(food)) {
+            random = Random().nextInt(30)
+            println(random)
+        }
+        recipeNameEt.setText(recipeList.get(random).toString())
+
+    }
+
+
 
 }
