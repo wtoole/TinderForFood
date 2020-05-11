@@ -44,6 +44,10 @@ class AddRecipeActivity2 : AppCompatActivity() {
         finish()
     }
 
+    private fun handleBackBtnClick(){
+
+    }
+
     companion object {
         val RECIPE_KEY = "RECIPE_EXTRA"
     }

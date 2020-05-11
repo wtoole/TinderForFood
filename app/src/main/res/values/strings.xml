@@ -10,6 +10,9 @@
     <string name="add_recipe_screen_title">Add Recipe</string>
     <string name="addrecipe_is_awesome_label">Is Awesome</string>
     <string name="addrecipe_track_num_label">Track Num:</string>
-    <string name="addrecipe_artist_label">Artist:</string>
+    <string name="addrecipe_location_label">Location:</string>
     <string name="addrecipe_name_label">Name:</string>
+    <string name="btn_skip">SKIP</string>
+    <string name="btn_back">BACK</string>
+    <string name="Completed_cb">COMLPETED</string>
 </resources>

@@ -108,6 +108,6 @@
             android:id="@+id/isAwesomeCb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Is Awesome" />
+            android:text="@string/Completed_cb" />
     </LinearLayout>
 </LinearLayout>

@@ -41,7 +41,9 @@ class AddRecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addRecipeBtn.setOnClickListener { handleAddRecipeClick() }
-
+        backBtn.setOnClickListener { handleBackBtnClick() }
+        skipBtn.setOnClickListener { handleSkipBtnClick() }
+        foodCategory()
         val recipe = recipeController.getRecipeForEdit()
         populateRecipeForm(recipe)
     }
@@ -68,15 +70,44 @@ class AddRecipeFragment : Fragment() {
         recipeIsAwesomeCb.isChecked = false
     }
 
-    private fun handleAddRecipeClick() {
+    private fun handleBackBtnClick() {
         val trackNum = try {
             recipeTrackEt.editableText.toString().toInt()
         } catch (e: Exception) {
             0
         }
 
+        val recipe = Recipe(
+            id = getRecipeId(),
+            name = recipeNameEt.editableText.toString(),
+            artist = recipeArtistEt.editableText.toString(),
+            isAwesome = recipeIsAwesomeCb.isChecked,
+            trackNum = trackNum
+        )
+
+        if(recipeController.getRecipeForEdit() == null) {
+            recipeController.addNewRecipe(recipe)
+        } else {
+            recipeController.handleEditedRecipe(recipe)
+            addRecipeBtn.text = resources.getString(R.string.add_recipe_btn_txt)
+        }
+
+        recipeController.deleteRecipe(recipeController.recipes.getCount() - 1)
+
+        clearForm()
+    }
+
+    private fun handleSkipBtnClick() {
+        foodCategory()
+    }
 
 
+    private fun handleAddRecipeClick() {
+        val trackNum = try {
+            recipeTrackEt.editableText.toString().toInt()
+        } catch (e: Exception) {
+            0
+        }
 
         val recipe = Recipe(
             id = getRecipeId(),
@@ -94,6 +125,30 @@ class AddRecipeFragment : Fragment() {
         }
 
         clearForm()
+    }
+
+    private fun foodCategory(){
+        val random = Random().nextInt(10) + 1
+        if(random == 1 )
+            food_cat.text = "Pizza"
+        if(random == 2 )
+            food_cat.text = "Burger"
+        if(random == 3 )
+            food_cat.text = "Pasta"
+        if(random == 4 )
+            food_cat.text = "Salad"
+        if(random == 5 )
+            food_cat.text = "Sandwich"
+        if(random == 6 )
+            food_cat.text = "Chicken"
+        if(random == 7 )
+            food_cat.text = "Seafood"
+        if(random == 8 )
+            food_cat.text = "Vegan"
+        if(random == 9 )
+            food_cat.text = "Dessert"
+        if(random == 10 )
+            food_cat.text = "Soup"
     }
 
     fun populateRecipe() {
