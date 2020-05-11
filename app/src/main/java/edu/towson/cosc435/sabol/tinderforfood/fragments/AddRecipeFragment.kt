@@ -54,6 +54,11 @@ class AddRecipeFragment : Fragment() {
         skipBtn.setOnClickListener { handleSkipBtnClick() }
         foodCategory()
         fetchJson()
+        makeInvisible()
+        addRecipeBtn.visibility = View.INVISIBLE
+        food_cat.visibility = View.INVISIBLE
+        skipBtn.text = "START"
+
         val recipe = recipeController.getRecipeForEdit()
         populateRecipeForm(recipe)
     }
@@ -109,6 +114,10 @@ class AddRecipeFragment : Fragment() {
 
     private fun handleSkipBtnClick() {
         foodCategory()
+        addRecipeBtn.visibility = View.VISIBLE
+        food_cat.visibility = View.VISIBLE
+        skipBtn.text = "SKIP"
+        getRandomRecipeByFoodCategory(food_cat.text.toString())
     }
 
 
@@ -133,8 +142,6 @@ class AddRecipeFragment : Fragment() {
             recipeController.handleEditedRecipe(recipe)
             addRecipeBtn.text = resources.getString(R.string.add_recipe_btn_txt)
         }
-
-        getRandomRecipeByFoodCategory(food_cat.text.toString())
 
         clearForm()
     }
@@ -221,9 +228,19 @@ class AddRecipeFragment : Fragment() {
         while(!recipeList.get(random).name.equals(food)) {
             random = Random().nextInt(30)
             println(random)
+            recipeNameEt.setText(recipeList.get(random).name)
+            recipeArtistEt.setText(recipeList.get(random).artist)
         }
-        recipeNameEt.setText(recipeList.get(random).toString())
 
+    }
+
+    private fun makeInvisible() {
+        nameLabel.visibility = View.INVISIBLE
+        recipeNameEt.visibility = View.INVISIBLE
+        artistLabel.visibility = View.INVISIBLE
+        recipeArtistEt.visibility = View.INVISIBLE
+        trackLabel.visibility = View.INVISIBLE
+        recipeTrackEt.visibility = View.INVISIBLE
     }
 
 

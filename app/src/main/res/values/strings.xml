@@ -13,6 +13,7 @@
     <string name="addrecipe_location_label">Location:</string>
     <string name="addrecipe_name_label">Name:</string>
     <string name="btn_skip">SKIP</string>
+    <string name="btn_start">START</string>
     <string name="btn_back">BACK</string>
     <string name="Completed_cb">COMLPETED</string>
 </resources>

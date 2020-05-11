@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="@string/artist_label" />
+                android:text="@string/addrecipe_location_label" />
 
             <TextView
                 android:id="@+id/recipeArtist"
@@ -75,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="@string/track_label" />
+                android:text="@string/track_label"
+                android:textColor="#00FFFFFF" />
 
             <TextView
                 android:id="@+id/recipeTrackNum"
@@ -83,9 +84,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
-                tools:text="11"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                tools:text="11" />
         </LinearLayout>
 
     </LinearLayout>
