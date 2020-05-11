@@ -6,8 +6,8 @@
     <string name="name_label">Name:</string>
     <string name="artist_label">Artist:</string>
     <string name="track_label">Track:</string>
-    <string name="add_recipe_btn_txt">Add Recipe</string>
-    <string name="add_recipe_screen_title">Add Recipe</string>
+    <string name="add_recipe_btn_txt">Add Food Idea</string>
+    <string name="add_recipe_screen_title">Add Food Idea</string>
     <string name="addrecipe_is_awesome_label">Is Awesome</string>
     <string name="addrecipe_track_num_label">Track Num:</string>
     <string name="addrecipe_location_label">Location:</string>

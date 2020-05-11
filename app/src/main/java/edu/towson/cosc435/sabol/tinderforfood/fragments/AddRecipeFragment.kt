@@ -13,6 +13,7 @@ import edu.towson.cosc435.sabol.tinderforfood.R
 import edu.towson.cosc435.sabol.tinderforfood.interfaces.IRecipeController
 import edu.towson.cosc435.sabol.tinderforfood.models.Recipe
 import kotlinx.android.synthetic.main.fragment_add_recipe.*
+import kotlinx.android.synthetic.main.recipe_view.*
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
@@ -55,6 +56,7 @@ class AddRecipeFragment : Fragment() {
         foodCategory()
         fetchJson()
         makeInvisible()
+        recipeIsAwesomeCb.visibility = View.INVISIBLE
         addRecipeBtn.visibility = View.INVISIBLE
         food_cat.visibility = View.INVISIBLE
         skipBtn.text = "START"
